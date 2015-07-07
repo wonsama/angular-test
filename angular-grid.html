@@ -1,0 +1,46 @@
+<!doctype html>
+<html ng-app="app">
+  <head>
+    <title>angularjs-grid example</title>
+    <link rel="stylesheet" type="text/css" href="css/ui-grid.min.css">
+    <style type="text/css">
+      .grid{
+        /*
+          width: 200px;
+        */
+        height: 800px;
+      }
+    </style>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  </head>
+  <body>
+
+    <div ng-controller="MainCtrl">
+      <div id="gridList" ui-grid="gridOptions" class="grid"></div>
+    </div>
+  
+    <script src="js/angular.min.js"></script>
+    <script src="js/ui-grid.min.js"></script>
+    <script>
+        var url = "http://localhost:8080/common/user/list/json";
+        var app = angular.module('app', ['ui.grid']);
+        app.controller('MainCtrl', ['$scope', '$http', 'i18nService', function ($scope, $http, i18nService) {
+          
+          var data = {nm:null};
+          var res = $http.post(url, data);
+          i18nService.setCurrentLang('ko');
+
+          $scope.gridOptions = {};
+          res.success(function(data,status,headers,config){
+            $scope.gridOptions.data = data;
+          });
+          res.error(function(data,status,headers,config){
+            alert("error");            
+          });
+
+        }]);
+
+    </script>
+
+  </body>
+</html>
