@@ -19,7 +19,7 @@
       <div id="gridList" ui-grid="gridOptions" class="grid"></div>
     </div>
   
-    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <!-- <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script> -->
     <script src="js/angular.min.js"></script>
     <script src="js/ui-grid.min.js"></script>
     <script>
@@ -27,13 +27,13 @@
         var app = angular.module('app', ['ui.grid']);
         app.controller('MainCtrl', ['$scope', '$http', 'i18nService', function ($scope, $http, i18nService) {
 
-
-
           $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
           
-          var data = {nm:"김", rnk:"초급"};
+          var data = {rnk:"초급", nm:"김"};
           var res = $http.post(url, serializeData(data) );
           i18nService.setCurrentLang('ko');
+
+          console.log( serializeData(data) );
 
           $scope.gridOptions = {};
           res.success(function(data,status,headers,config){
