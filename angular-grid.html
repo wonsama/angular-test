@@ -19,15 +19,20 @@
       <div id="gridList" ui-grid="gridOptions" class="grid"></div>
     </div>
   
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="js/angular.min.js"></script>
     <script src="js/ui-grid.min.js"></script>
     <script>
         var url = "http://localhost:8080/common/user/list/json";
         var app = angular.module('app', ['ui.grid']);
         app.controller('MainCtrl', ['$scope', '$http', 'i18nService', function ($scope, $http, i18nService) {
+
+
+
+          $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
           
-          var data = {nm:null};
-          var res = $http.post(url, data);
+          var data = {nm:"김", rnk:"초급"};
+          var res = $http.post(url, serializeData(data) );
           i18nService.setCurrentLang('ko');
 
           $scope.gridOptions = {};
@@ -39,6 +44,46 @@
           });
 
         }]);
+
+        function serializeData( data ) {
+
+          // If this is not an object, defer to native stringification.
+          if ( ! angular.isObject( data ) ) {
+
+            return( ( data == null ) ? "" : data.toString() );
+
+          }
+
+          var buffer = [];
+
+          // Serialize each key in the object.
+          for ( var name in data ) {
+
+            if ( ! data.hasOwnProperty( name ) ) {
+
+              continue;
+
+            }
+
+            var value = data[ name ];
+
+            buffer.push(
+              encodeURIComponent( name ) +
+              "=" +
+              encodeURIComponent( ( value == null ) ? "" : value )
+            );
+
+          }
+
+          // Serialize the buffer and clean it up for transportation.
+          var source = buffer
+            .join( "&" )
+            .replace( /%20/g, "+" )
+          ;
+
+          return( source );
+
+        }
 
     </script>
 
