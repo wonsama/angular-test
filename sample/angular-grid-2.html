@@ -1,0 +1,68 @@
+<!doctype html>
+<html ng-app="app">
+
+<head>
+    <title>angularjs-grid example</title>
+    <link rel="stylesheet" type="text/css" href="../css/ui-grid.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/angular-material.min.css">
+    <style type="text/css">
+    body {
+        margin: 20px;
+    }
+    
+    .spTitle {
+        font-size: 20px;
+        color: #C9A72E;
+    }
+    </style>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+
+<body>
+    <!--
+      ui-start
+    -->
+    <div ng-controller="MainCtrl" layout-margin>
+        <section layout="row" layout-sm="column" layout-align="center center">
+            <span class="spTitle">인력 조회 예제</span>
+        </section>
+        <section layout="row" layout-sm="column" layout-align="center center">
+            <md-input-container flex="40">
+                <label>이름</label>
+                <input ng-model="searchData.nm">
+            </md-input-container>
+            <md-input-container flex="40">
+                <label>등급</label>
+                <input ng-model="searchData.rnk">
+            </md-input-container>
+            <md-button class="md-fab md-mini" aria-label="search" ng-click="search()">
+                <md-icon md-svg-icon="http://jwsnt.co.kr/svg/ic_search_24px.svg"></md-icon>
+            </md-button>
+        </section>
+        <section layout="row" layout-sm="column" layout-align="center center">
+            <div>조회 결과 : {{resultCount}} 건</div>
+        </section>
+        <div id="gridList" ui-grid="gridOptions" class="grid" flex></div>
+    </div>
+    <!--
+      ui-end
+    -->
+    <!--
+      angular-js, material design and 3rd party module
+    -->
+    <script src="../js/angular.min.js"></script>
+    <script src="../js/angular-animate.min.js"></script>
+    <script src="../js/angular-aria.min.js"></script>
+    <script src="../js/angular-material.min.js"></script>
+    <script src="../js/ui-grid.min.js"></script>
+    <!--
+      jw-core & my app
+    -->
+    <script src="jw-core.js"></script>
+    <script src="angular-grid-2.js"></script>
+    <!--
+      jw-core & my app
+    -->
+</body>
+
+</html>
