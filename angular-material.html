@@ -1,0 +1,39 @@
+<!doctype html>
+<html ng-app="app">
+
+<head>
+    <title>angularjs-material example</title>
+    <link rel="stylesheet" type="text/css" href="css/ui-grid.min.css">
+    <link rel="stylesheet" type="text/css" href="css/angular-material.min.css">
+    <style type="text/css">
+    .bgOrange {
+        background-color: orange;
+    }
+    </style>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+
+<body>
+    <div layout="row" layout-align="space-around center">
+        <div class="bgOrange">&nbsp;</div>
+        <div ng-controller="AppCtrl">
+            <md-button class="md-raised" ng-click="showDialog($event)">Button</md-button>
+        </div>
+        <div class="bgOrange">&nbsp;</div>
+    </div>
+    <script src="js/angular.min.js"></script>
+    <script src="js/angular-animate.min.js"></script>
+    <script src="js/angular-aria.min.js"></script>
+    <script src="js/angular-material.min.js"></script>
+    <script src="js/ui-grid.min.js"></script>
+    <script>
+    var app = angular.module('app', ['ui.grid', 'ngMaterial']);
+    app.controller('AppCtrl', ['$scope', function($scope) {
+
+                
+                    
+                }]);
+    </script>
+</body>
+
+</html>
