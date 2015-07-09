@@ -1,0 +1,61 @@
+<html>
+
+<head>
+    <title>test</title>
+        <style type="text/css">
+            a{color:#222;text-decoration:none}
+            a:hover{color:#390;text-decoration:underline}
+            #divWeather{
+                display: table;
+            }
+            span{
+                display: table-cell;
+                vertical-align: middle;
+                color: silver;
+            }
+    </style>
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script>
+    
+    $(document).ready(function(){
+
+        var icon = "http://openweathermap.org/img/w/{{icon}}.png";
+        var url = "http://api.openweathermap.org/data/2.5/weather?q=seoul&units=metric";
+
+        /*
+            날씨 API - 날씨 정보를 json 형태로 받아온다 
+            http://openweathermap.org/current
+            http://map.naver.com/?dlevel=11&pinType=site&pinId=13479472&x=127.0795021&y=37.5572212&enc=b64
+        */
+        $.ajax({
+            method: 'post',
+            dataType: "json",
+            url: url,
+
+            success: function(data) {
+                console.log(data);
+
+                $("#imgWeather").attr("src", icon.replace("{{icon}}", data.weather[0].icon) );
+                $("#spTime").text( "{{time}} 기준".replace("{{time}}", new Date(data.dt *1000).toLocaleString()) );
+                $("#spTemp").text( data.main.temp + " ℃");
+                $("#spName").text( "[ {{name}} ] ".replace("{{name}}", data.name) );
+            }
+        });
+	
+    });
+
+    </script>
+
+</head>
+
+<body>
+<div id="divWeather">
+    
+    <span id="spName"></span>
+    <span id="spTemp"></span>
+    <img id="imgWeather">
+    <span id="spTime"></span>
+</div>
+</body>
+
+</html>

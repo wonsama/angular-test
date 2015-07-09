@@ -19,9 +19,7 @@
 </head>
 
 <body>
-    <!--
-      ui-start
-    -->
+    
     <div ng-controller="MainCtrl" layout-margin>
         <section layout="row" layout-sm="column" layout-align="center center">
             <span class="spTitle">인력 조회 예제</span>
@@ -36,7 +34,7 @@
                 <input ng-model="searchData.rnk">
             </md-input-container>
             <md-button class="md-fab md-mini" aria-label="search" ng-click="search()">
-                <md-icon md-svg-icon="http://jwsnt.co.kr/svg/ic_search_24px.svg"></md-icon>
+                <md-icon md-svg-icon="http://localhost:8080/resources/ic_search_24px.svg"></md-icon>
             </md-button>
         </section>
         <section layout="row" layout-sm="column" layout-align="center center">
@@ -44,9 +42,7 @@
         </section>
         <div id="gridList" ui-grid="gridOptions" class="grid" flex></div>
     </div>
-    <!--
-      ui-end
-    -->
+    
     <!--
       angular-js, material design and 3rd party module
     -->
@@ -60,9 +56,7 @@
     -->
     <script src="jw-core.js"></script>
     <script src="angular-grid-2.js"></script>
-    <!--
-      jw-core & my app
-    -->
+
 </body>
 
 </html>

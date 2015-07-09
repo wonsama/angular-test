@@ -13,6 +13,7 @@ app.controller('MainCtrl', function($scope, $http, i18nService, $mdToast, $anima
         nm: ""
     };
 
+    //set search count
     $scope.resultCount = 0;
 
     //set post header
@@ -25,7 +26,7 @@ app.controller('MainCtrl', function($scope, $http, i18nService, $mdToast, $anima
     $scope.toastPosition = {
         bottom: true,
         top: false,
-        left: false,
+        left: true,
         right: true
     };
     $scope.getToastPosition = function() {
