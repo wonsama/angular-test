@@ -39,29 +39,38 @@
             </md-input-container>
             <!-- <i class="svg-ic_search_24px">search</i> -->
             <md-button class="md-fab md-mini md-primary" aria-label="search" ng-click="search()">
-                <ng-md-icon icon="search" style="fill: #184706" size="30"></ng-md-icon> 
+                <ng-md-icon icon="search" style="fill: #FFFFFF" size="35"></ng-md-icon> 
             </md-button>
             <md-button class="md-fab md-mini" aria-label="register" ng-click="register($event)">
-                <ng-md-icon icon="add" style="fill: #641113" size="30"></ng-md-icon>
+                <ng-md-icon icon="add" style="fill: #FFFFFF" size="35"></ng-md-icon>
             </md-button>
             
         </section>
-        <section layout="row" layout-sm="column" layout-align="center center">
+        <section layout="column" layout-sm="column" layout-align="center center">
             <div>조회 결과 : {{resultCount}} 건</div>
+            <div>{{regResult}}</div>
         </section>
 
         <div id="gridList" ui-grid="gridOptions" class="grid" flex></div>
     </div>
     
     <!--
-      angular-js, material design and 3rd party module
+        angular-js
     -->
     <script src="../js/angular.min.js"></script>
+    <!--
+        angular-material
+    -->
     <script src="../js/angular-animate.min.js"></script>
     <script src="../js/angular-aria.min.js"></script>
     <script src="../js/angular-material.min.js"></script>
+    <script src="../js/angular-messages.min.js"></script>
+    <!--
+        3rd-party
+    -->
     <script src="../js/ui-grid.min.js"></script>
     <script src="../js/angular-material-icons.min.js"></script>
+    
     
     <!--
       jw-core & my app

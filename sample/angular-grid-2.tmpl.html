@@ -1,6 +1,59 @@
 <md-dialog aria-label="Mango (Fruit)">
-	<div>HELLO</div>
-	<div>HELLO</div>
-	<div>HELLO</div>
-    <div ng-click="close()">CLOSE</div>
+    <form name="regForm">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>인력 등록</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="close()" aria-label="close">
+                    <ng-md-icon icon="close" style="fill: #FFFFFF" size="35"></ng-md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div>
+                <p>
+                    필요한 정보를 모두 넣어 작성하기 바랍니다.
+                </p>
+            </div>
+            <div layout="row">
+                <ng-md-icon icon="group" style="fill: #2FC1CB; padding-right:10px;" size="30"></ng-md-icon>
+                <md-input-container>
+                    <label>이름</label>
+                    <input type="text" required name="nm" ng-model="formData.nm" />
+                    <div ng-messages="regForm.nm.$error">
+                        <div ng-message="required">필수 입력 항목입니다.</div>
+                    </div>
+                </md-input-container>
+                <md-input-container>
+                    <label>나이</label>
+                    <input type="text" type="number" required name="age" min="30" ng-model="formData.age" />
+                    <div ng-messages="regForm.age.$error">
+                        <div ng-message="required">필수 입력 항목입니다.</div>
+                    </div>
+                </md-input-container>
+                <md-select placeholder="등급" name="rnk" ng-model="formData.rnk" required>
+                    <md-option ng-repeat="g in grades" value="{{g.key}}">{{g.value}}</md-option>
+                </md-select>
+            </div>
+            <div layout="row">
+                <ng-md-icon icon="insert_comment" style="fill: #2FC1CB; padding-right:10px;" size="30"></ng-md-icon>
+                <md-input-container flex>
+                    <label>비고</label>
+                    <input type="text" ng-model="formData.ref" />
+                </md-input-container>
+            </div>
+            <div layout="row">
+                <md-button class="md-raised md-mini md-warn" aria-label="clear" ng-disabled="!formData" ng-click="clear()">
+                    지우기
+                </md-button>
+                <span flex></span>
+                <md-button class="md-raised md-mini md-primary" aria-label="register" ng-disabled="regForm.$invalid" ng-click="register()">
+                    등록
+                </md-button>
+                <md-button class="md-raised md-mini md-primary" aria-label="close" ng-click="close()">
+                    취소
+                </md-button>
+            </div>
+        </md-dialog-content>
+    </form>
 </md-dialog>

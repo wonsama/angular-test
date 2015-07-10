@@ -1,8 +1,11 @@
 var url = "http://localhost:8080/common/user/list/json";
-var app = angular.module('app', ['ui.grid', 'ngMaterial', 'ngMdIcons']);
+var app = angular.module('app', ['ui.grid', 'ngMaterial', 'ngMdIcons', 'ngMessages']);
 
 //
 app.controller('MainCtrl', function($scope, $http, i18nService, $mdToast, $animate, $mdDialog) {
+
+
+
 
     //set grid options
     $scope.gridOptions = {};
@@ -44,12 +47,47 @@ app.controller('MainCtrl', function($scope, $http, i18nService, $mdToast, $anima
             templateUrl: 'angular-grid-2.tmpl.html',
             parent: angular.element(document.body),
             targetEvent: ev,
+        }).then(function(response) {
+            $scope.regResult = "응답 : " + JSON.stringify(response);
+        }, function() {
+            $scope.regResult = "취소 버튼을 누르셨습니다.";
         });
     };
 
     function DialogController($scope, $mdDialog) {
+
+        $scope.formData = undefined;
+
+        $scope.grade = "";
+        $scope.grades = [{
+            key: "10",
+            value: "초급"
+        }, {
+            key: "20",
+            value: "중급"
+        }, {
+            key: "30",
+            value: "고급"
+        }, {
+            key: "40",
+            value: "특급"
+        }];
+
+        //clear
+        $scope.clear = function() {
+            $scope.formData = undefined;
+        };
+
+        //register
+        $scope.register = function() {
+            //hide 인 경우 부모 창에 값을 전달 할 수 있다.
+            $mdDialog.hide($scope.formData);
+        };
+
+        //close
         $scope.close = function() {
-            $mdDialog.hide();
+            //cancel 인 경우 함수에 값이 없는(void) 형태로 전달된다
+            $mdDialog.cancel();
         };
     }
 
@@ -96,6 +134,6 @@ app.controller('MainCtrl', function($scope, $http, i18nService, $mdToast, $anima
 
 
 app.config(function($mdThemingProvider) {
-  $mdThemingProvider.theme('default')
-  .primaryPalette('green');
+    $mdThemingProvider.theme('default')
+        .primaryPalette('cyan');
 });
