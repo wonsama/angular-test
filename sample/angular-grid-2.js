@@ -1,5 +1,5 @@
 var url = "http://localhost:8080/common/user/list/json";
-var app = angular.module('app', ['ui.grid', 'ngMaterial']);
+var app = angular.module('app', ['ui.grid', 'ngMaterial', 'ngMdIcons']);
 
 //
 app.controller('MainCtrl', function($scope, $http, i18nService, $mdToast, $animate, $mdDialog) {
@@ -92,4 +92,10 @@ app.controller('MainCtrl', function($scope, $http, i18nService, $mdToast, $anima
         $scope.search();
     })();
 
+});
+
+
+app.config(function($mdThemingProvider) {
+  $mdThemingProvider.theme('default')
+  .primaryPalette('green');
 });
