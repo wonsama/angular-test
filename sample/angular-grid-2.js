@@ -2,7 +2,7 @@ var url = "http://localhost:8080/common/user/list/json";
 var app = angular.module('app', ['ui.grid', 'ngMaterial']);
 
 //
-app.controller('MainCtrl', function($scope, $http, i18nService, $mdToast, $animate) {
+app.controller('MainCtrl', function($scope, $http, i18nService, $mdToast, $animate, $mdDialog) {
 
     //set grid options
     $scope.gridOptions = {};
@@ -36,6 +36,22 @@ app.controller('MainCtrl', function($scope, $http, i18nService, $mdToast, $anima
             })
             .join(' ');
     };
+
+    //function register
+    $scope.register = function(ev) {
+        $mdDialog.show({
+            controller: DialogController,
+            templateUrl: 'angular-grid-2.tmpl.html',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+        });
+    };
+
+    function DialogController($scope, $mdDialog) {
+        $scope.close = function() {
+            $mdDialog.hide();
+        };
+    }
 
     //function search
     $scope.search = function() {
@@ -72,7 +88,7 @@ app.controller('MainCtrl', function($scope, $http, i18nService, $mdToast, $anima
     };
 
     //default search
-    (function(){
+    (function() {
         $scope.search();
     })();
 
