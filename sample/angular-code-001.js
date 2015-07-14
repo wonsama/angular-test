@@ -15,13 +15,14 @@ var URL_PREFIX = "http://localhost:8080";
 var URL_CODE_LIST = URL_PREFIX + "/common/code/list";
 var URL_GROUP_LIST = URL_PREFIX + "/common/group/list";
 var URL_CODE_INS = URL_PREFIX + "/common/code/insert";
+var URL_CODE_DEL = URL_PREFIX + "/common/code/delete";
 
 var app = angular.module('app', ['ngTouch', 'ui.grid', 'ui.grid.selection', 'ngMaterial', 'ngMdIcons', 'ngMessages']);
 
 /*
  * 설정 : 컨트롤러
  */
-app.controller('MainCtrl', function($scope, $http, i18nService, $mdToast, $animate, $mdDialog) {
+app.controller('MainCtrl', function($scope, $http, i18nService, $mdToast, $animate, $mdDialog, $timeout) {
 
     /*
      * 설정 : 그리드
@@ -141,6 +142,7 @@ app.controller('MainCtrl', function($scope, $http, i18nService, $mdToast, $anima
             //등록 : 공통코드를 등록한다
             $http.post(URL_CODE_INS, jw.serializeData(response))
             .success(function(data) {
+                console.log( data );
                 $scope.select();
             }).error(function(data) {
                 console.log("insert - error");
@@ -151,7 +153,7 @@ app.controller('MainCtrl', function($scope, $http, i18nService, $mdToast, $anima
         });
     };
 
-/**
+    /**
      * 컨트롤러 : insert - 코드 등록 Dialog
      */
     function insertController($scope, $mdDialog, $timeout) {
@@ -238,9 +240,44 @@ app.controller('MainCtrl', function($scope, $http, i18nService, $mdToast, $anima
         //ref : forEach
         //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach
         var items = $scope.gridApi.selection.getSelectedGridRows();
+        var data = [];
         items.forEach(function(item) {
-            console.log(item.entity);
+            // console.log(item.entity);
+            data.push(item.entity.cd_id);
         });
+
+        //선택 정보 점검 및 알림
+        if(data.length==0){
+            var alert = $mdDialog.alert()
+            .parent(angular.element(document.body))
+            .title('알림')
+            .content('선택 항목이 존재하지 않습니다.')
+            .ok('닫기');
+
+            $mdDialog.show(alert);
+            $timeout(function(){
+                $mdDialog.cancel();
+            },2000);
+            return;
+        }
+
+        //삭제 알림 확인
+        var confirm = $mdDialog.confirm()
+            .parent(angular.element(document.body))
+            .title('삭제')
+            .content('선택한 {{count}}개의 정보를 삭제 하시겠습니까 ?'.replace("{{count}}",data.length))
+            .ariaLabel('delete')
+            .ok('삭제')
+            .cancel('취소');
+
+        //삭제 수행
+        $mdDialog.show(confirm).then(function() {
+            $http.post(URL_CODE_DEL, jw.serializeData( { data : data.join(',') } ))
+            .success(function(data) {
+                // console.log( data );
+                $scope.select();
+            });
+        });        
 
     };
 

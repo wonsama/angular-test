@@ -1,6 +1,5 @@
 <md-dialog aria-label="Code Register">
     <form name="regForm">
-
         <!-- 
             상단 : 툴바 구역
         -->
@@ -13,41 +12,44 @@
                 </md-button>
             </div>
         </md-toolbar>
-
         <!-- 
             하단 : 실제 내용
         -->
         <md-dialog-content>
-            <div>
+            <!-- <div>
                 <p>
                     필요한 정보를 모두 넣어 작성하기 바랍니다.
                 </p>
-            </div>
+            </div> -->
             <!--
                 구역 1 : 입력 - 그룹명, 코드명 
             -->
-            <div layout="row">
-                <ng-md-icon icon="group" style="fill: #2FC1CB; padding-right:10px;" size="30"></ng-md-icon>
-                <md-select placeholder="그룹명" name="grp_id" ng-model="formData.grp_id" required ng-change="chgGroup()">
-
-                    <md-option ng-repeat="g in groups" ng-value="g.grp_id">{{g.grp_nm}}</md-option>
-                </md-select>
+            <div layout="row" flex>
+                <!-- <ng-md-icon icon="group" style="fill: #2FC1CB; padding-right:10px;" size="30"></ng-md-icon> -->
+                <md-input-container>
+                    <label>그룹명</label>
+                    <md-select placeholder="그룹명" name="grp_id" ng-model="formData.grp_id" required ng-change="chgGroup()">
+                        <label>그룹명</label>
+                        <md-option ng-repeat="g in groups" ng-value="g.grp_id">{{g.grp_nm}}</md-option>
+                    </md-select>
+                    <!-- <div ng-messages="regForm.grp_id.$error">
+                        <div ng-message="required">필수 입력</div>
+                    </div> -->
+                </md-input-container>
                 <md-input-container>
                     <label>코드명</label>
-                    <input type="text" required name="cd_nm" ng-model="formData.cd_nm" />                    
+                    <input type="text" required name="cd_nm" ng-model="formData.cd_nm" />
                     <div ng-messages="regForm.cd_nm.$error">
-                        <div ng-message="required">필수 입력 항목입니다.</div>
+                        <div ng-message="required">필수 입력</div>
                     </div>
-                </md-input-container>                
+                </md-input-container>
             </div>
-
             <!--
                 구역 2 : 선택 목록 그리드 
             -->
             <div layout="row">
                 <div ui-grid="gridOptionsGroup" class="gridSub" flex></div>
             </div>
-
             <!--
                 구역 3 : 버튼
             -->
@@ -63,8 +65,6 @@
                     취소
                 </md-button>
             </div>
-
-
         </md-dialog-content>
     </form>
 </md-dialog>

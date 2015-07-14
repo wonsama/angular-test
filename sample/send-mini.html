@@ -1,0 +1,64 @@
+<!doctype html>
+<html ng-app="app">
+
+<head>
+    <title>send-mini</title>
+    <link rel="stylesheet" type="text/css" href="../css/angular-material.min.css">
+    <style type="text/css">
+    </style>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+
+<body>
+    
+    <div ng-controller="MainCtrl" layout-margin>
+        <md-button class="md-fab md-mini md-primary" aria-label="test" ng-click="test()">TEST</md-button>
+    </div>
+    
+    <!--
+        angular-js
+    -->
+    <script src="../js/angular.min.js"></script>
+    <!--
+        angular-material
+    -->
+    <script src="../js/angular-animate.min.js"></script>
+    <script src="../js/angular-aria.min.js"></script>
+    <script src="../js/angular-material.min.js"></script>
+    
+    <!--
+      jw-core & my app
+    -->
+    <script src="jw-core.js"></script>
+    
+    <script type="text/javascript">
+        var app = angular.module('app', ['ngMaterial']);
+        app.controller('MainCtrl', function($scope, $http) {
+
+            /*
+             * 설정 : post 전송 형태 변경 ( json => form-url-encoded )
+             */
+            $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
+
+            $scope.test = function() {
+
+                //SETTING
+                var URL_PREFIX = "http://localhost:8080";
+                var URL_TEST = URL_PREFIX + "/common/code/list";
+                $scope.data = {
+
+                };
+
+                //공통코드 목록 조회
+                var res = $http.post(URL_TEST, jw.serializeData($scope.data));
+                res.success(function(data) {
+                    console.log( data );
+                });
+
+            };
+        });
+    </script>
+
+</body>
+
+</html>
