@@ -1,0 +1,90 @@
+<!doctype html>
+<html ng-app="app">
+
+<head>
+    <title>angularjs-grid example</title>
+    <link rel="stylesheet" type="text/css" href="../css/ui-grid.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/angular-material.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/angular-material-icons.css">
+    <style type="text/css">
+    body {
+        margin: 20px;
+    }
+    
+    .spTitle {
+        font-size: 20px;
+        color: #C9A72E;
+    }
+    .btn{
+        background-color: black;
+    }
+    .gridMain{
+        height : 500px;
+    }
+    .gridSub{
+        height : 200px;
+    }
+    </style>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+
+<body>
+    
+    <div ng-controller="MainCtrl" layout-margin>
+        <section layout="row" layout-sm="column" layout-align="center center">
+            <span class="spTitle">공통코드 목록조회</span>
+        </section>
+        <section layout="row" layout-sm="column" layout-align="center center">
+            <md-input-container flex="40">
+                <label>그룹명</label>
+                <input ng-model="searchData.grp_nm">
+            </md-input-container>
+            <md-input-container flex="40">
+                <label>코드명</label>
+                <input ng-model="searchData.cd_nm">
+            </md-input-container>
+            <!-- <i class="svg-ic_search_24px">search</i> -->
+            <md-button class="md-fab md-mini md-primary" aria-label="select" ng-click="select($event)">
+                <ng-md-icon icon="search" style="fill: #FFFFFF" size="35"></ng-md-icon> 
+            </md-button>
+            <md-button class="md-fab md-mini md-accent md-hue-3" aria-label="insert" ng-click="insert($event)">
+                <ng-md-icon icon="add" style="fill: #FFFFFF" size="35"></ng-md-icon>
+            </md-button>
+            <md-button class="md-fab md-mini md-warn" aria-label="delete" ng-click="delete($event)">
+                <ng-md-icon icon="delete" style="fill: #FFFFFF" size="35"></ng-md-icon>
+            </md-button>
+            
+        </section>
+
+        <div ui-grid="gridOptions" ui-grid-selection class="gridMain" flex></div>
+    </div>
+    
+    <!--
+        angular-js
+    -->
+    <script src="../js/angular.min.js"></script>
+    <!--
+        angular-material
+    -->
+    <script src="../js/angular-animate.min.js"></script>
+    <script src="../js/angular-aria.min.js"></script>
+    <script src="../js/angular-material.min.js"></script>
+    <script src="../js/angular-messages.min.js"></script>
+    <script src="../js/angular-touch.min.js"></script>
+    
+    <!--
+        3rd-party
+    -->
+    <script src="../js/ui-grid.min.js"></script>
+    <script src="../js/angular-material-icons.min.js"></script>
+    
+    
+    <!--
+      jw-core & my app
+    -->
+    <script src="jw-core.js"></script>
+    <script src="angular-code-001.js"></script>
+
+</body>
+
+</html>

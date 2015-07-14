@@ -1,0 +1,70 @@
+<md-dialog aria-label="Code Register">
+    <form name="regForm">
+
+        <!-- 
+            상단 : 툴바 구역
+        -->
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>코드 등록</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="close()" aria-label="close">
+                    <ng-md-icon icon="close" style="fill: #FFFFFF" size="35"></ng-md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <!-- 
+            하단 : 실제 내용
+        -->
+        <md-dialog-content>
+            <div>
+                <p>
+                    필요한 정보를 모두 넣어 작성하기 바랍니다.
+                </p>
+            </div>
+            <!--
+                구역 1 : 입력 - 그룹명, 코드명 
+            -->
+            <div layout="row">
+                <ng-md-icon icon="group" style="fill: #2FC1CB; padding-right:10px;" size="30"></ng-md-icon>
+                <md-select placeholder="그룹명" name="grp_id" ng-model="formData.grp_id" required ng-change="chgGroup()">
+
+                    <md-option ng-repeat="g in groups" ng-value="g.grp_id">{{g.grp_nm}}</md-option>
+                </md-select>
+                <md-input-container>
+                    <label>코드명</label>
+                    <input type="text" required name="cd_nm" ng-model="formData.cd_nm" />                    
+                    <div ng-messages="regForm.cd_nm.$error">
+                        <div ng-message="required">필수 입력 항목입니다.</div>
+                    </div>
+                </md-input-container>                
+            </div>
+
+            <!--
+                구역 2 : 선택 목록 그리드 
+            -->
+            <div layout="row">
+                <div ui-grid="gridOptionsGroup" class="gridSub" flex></div>
+            </div>
+
+            <!--
+                구역 3 : 버튼
+            -->
+            <div layout="row">
+                <md-button class="md-raised md-mini md-warn" aria-label="clear" ng-disabled="!formData" ng-click="clear()">
+                    지우기
+                </md-button>
+                <span flex></span>
+                <md-button class="md-raised md-mini md-primary" aria-label="register" ng-disabled="regForm.$invalid" ng-click="register()">
+                    등록
+                </md-button>
+                <md-button class="md-raised md-mini md-primary" aria-label="close" ng-click="close()">
+                    취소
+                </md-button>
+            </div>
+
+
+        </md-dialog-content>
+    </form>
+</md-dialog>

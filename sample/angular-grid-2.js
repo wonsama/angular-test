@@ -48,7 +48,35 @@ app.controller('MainCtrl', function($scope, $http, i18nService, $mdToast, $anima
             parent: angular.element(document.body),
             targetEvent: ev,
         }).then(function(response) {
-            $scope.regResult = "응답 : " + JSON.stringify(response);
+            
+
+            // $scope.regResult = "응답 : " + JSON.stringify(response);
+
+            url = "/common/test/insert";
+            var res = $http.post(url, jw.serializeData(response));
+
+            res.success(function(data, status, headers, config) {
+                $scope.gridOptions.data = data;
+
+                $scope.resultCount = data.length;
+
+                $mdToast.show(
+                    $mdToast.simple()
+                    .content('조회가 완료 되었습니다.')
+                    .position($scope.getToastPosition())
+                    .hideDelay(1000)
+                );
+            });
+            res.error(function(data, status, headers, config) {
+                $mdToast.show(
+                    $mdToast.simple()
+                    .content('조회가 실패 했습니다.')
+                    .position($scope.getToastPosition())
+                    .hideDelay(1000)
+                );
+            });
+
+
         }, function() {
             $scope.regResult = "취소 버튼을 누르셨습니다.";
         });
