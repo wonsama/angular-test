@@ -1,17 +1,18 @@
 <md-dialog aria-label="Code Register">
-    <form name="regForm">
-        <!-- 
+    <!-- 
             상단 : 툴바 구역
         -->
-        <md-toolbar>
-            <div class="md-toolbar-tools">
-                <h2>코드 등록</h2>
-                <span flex></span>
-                <md-button class="md-icon-button" ng-click="close()" aria-label="close">
-                    <ng-md-icon icon="close" style="fill: #FFFFFF" size="35"></ng-md-icon>
-                </md-button>
-            </div>
-        </md-toolbar>
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>코드 등록</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="close()" aria-label="close">
+                <ng-md-icon icon="close" style="fill: #FFFFFF" size="35"></ng-md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    
+    <form name="regForm">
         <!-- 
             하단 : 실제 내용
         -->
@@ -24,10 +25,10 @@
             <!--
                 구역 1 : 입력 - 그룹명, 코드명 
             -->
-            <div layout="row" flex>
-                <!-- <ng-md-icon icon="group" style="fill: #2FC1CB; padding-right:10px;" size="30"></ng-md-icon> -->
-                <md-input-container>
-                    <label>그룹명</label>
+            <div layout="row">
+                <ng-md-icon icon="group" style="fill: #2FC1CB; padding-right:10px;" size="30"></ng-md-icon>
+                <!-- <md-input-container> -->
+                    <!-- <label>그룹명</label> -->
                     <md-select placeholder="그룹명" name="grp_id" ng-model="formData.grp_id" required ng-change="chgGroup()">
                         <label>그룹명</label>
                         <md-option ng-repeat="g in groups" ng-value="g.grp_id">{{g.grp_nm}}</md-option>
@@ -35,7 +36,7 @@
                     <!-- <div ng-messages="regForm.grp_id.$error">
                         <div ng-message="required">필수 입력</div>
                     </div> -->
-                </md-input-container>
+                <!-- </md-input-container> -->
                 <md-input-container>
                     <label>코드명</label>
                     <input type="text" required name="cd_nm" ng-model="formData.cd_nm" />
