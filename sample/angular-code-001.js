@@ -127,6 +127,43 @@ app.controller('MainCtrl', function($scope, $http, i18nService, $mdToast, $anima
     };
 
     /*
+    * 변경 : 공통코드
+    */
+    $scope.update = function(ev) {
+
+        var item = $scope.gridApi.selection.getSelectedGridRows()[0];
+        if(item==undefined){
+            return;
+        }
+        
+        $mdDialog.show({
+            controller: updateController,
+            templateUrl: 'angular-code-002.tmpl.html',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            locals : {
+                item : item.entity
+            }
+        })
+    };
+
+    /*
+    * 컨트롤러 : update - 코드 변경 Dialog
+    */
+    function updateController($scope, $mdDialog, item){
+        /**
+         * 버튼 : 닫기 또는 취소 
+         */
+        $scope.close = function() {
+            $mdDialog.cancel();
+        };
+
+        $scope.wow = JSON.stringify( item );
+
+        // console.log( item );
+    }
+
+    /*
      * 등록 : 공통코드 
      */
     $scope.insert = function(ev) {
