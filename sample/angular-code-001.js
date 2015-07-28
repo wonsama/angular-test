@@ -11,7 +11,7 @@
         팝업 후 동일 parent로 팝업을 show 하면 기본적으로 이전 팝업은 cancel 처리가 됨.
 */
 
-var URL_PREFIX = "http://localhost:8080";
+var URL_PREFIX = ".";
 var URL_CODE_LIST = URL_PREFIX + "/common/code/list";
 var URL_GROUP_LIST = URL_PREFIX + "/common/group/list";
 var URL_CODE_INS = URL_PREFIX + "/common/code/insert";

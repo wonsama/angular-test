@@ -1,0 +1,98 @@
+<!doctype html>
+<html ng-app="app">
+
+<head>
+    <title>angularjs-grid example</title>
+    <link rel="stylesheet" type="text/css" href="../css/angular-material.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/angular-material-icons.css">
+    <style type="text/css">
+    body {
+        margin: 20px;
+    }
+    
+    .spTitle {
+        font-size: 20px;
+        color: #C9A72E;
+    }
+    
+    .btn {
+        background-color: black;
+    }
+    
+    .gridMain {
+        height: 500px;
+    }
+    
+    .gridSub {
+        height: 200px;
+    }
+    </style>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+
+<body>
+    <div ng-controller="x" layout-margin>
+        <table>
+            <tr>
+            <td>이름</td>
+            <td>금액</td>
+            </tr>
+            <tr ng-repeat="tb in tbData">
+                <td>{{ tb.name }}</td>
+                <td>{{ tb.balance }}</td>
+            </tr>
+            <tr>
+            <td>합계</td>
+            <td>{{sum}}</td>
+            </tr>
+        </table>
+    </div>
+    <!--
+        angular-js
+    -->
+    <script src="../js/angular.min.js"></script>
+    <!--
+        angular-material
+    -->
+    <!--
+    <script src="../js/angular-animate.min.js"></script>
+    <script src="../js/angular-aria.min.js"></script>
+    <script src="../js/angular-material.min.js"></script>
+    <!--
+        3rd-party
+    -->
+    <!--
+      jw-core & my app
+    -->
+    <script>
+    var app = angular.module('app', []);
+    /*
+     * 설정 : 컨트롤러
+     */
+    app.controller('x', function($scope) {
+        //[] : array
+        //{} : object
+
+        $scope.tbData = [{
+            name: "박원",
+            balance: 2000
+        }, {
+            name: "박준형",
+            balance: 3000
+        }, {
+            name: "이승용",
+            balance: -33000
+        }];
+
+        $scope.sum = 0;
+
+        //obj => value, key
+        //array => obj, index
+        angular.forEach( $scope.tbData, function(obj, idx) {
+            $scope.sum += obj.balance;
+        });
+    });
+    </script>
+</body>
+
+</html>
